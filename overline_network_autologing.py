@@ -2,10 +2,19 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
+from credentials import *
 import time
+import sys
 
-username = "11"
-password = "12"
+username = overline_username_1
+password = overline_password_1
+
+# place credentials here and uncomment it 
+#username = "paster login here"
+#password = "paster password here here"
+
+
 
 print("Test Execution Started")
 options = webdriver.ChromeOptions()
@@ -35,16 +44,19 @@ time.sleep(3)
 print("trying to hit login button")
 driver.find_element(By.XPATH, "/html/body/div/div[2]/div/div/div/div/div/div/div[2]/form/button[1]").click()
 print("waiting after login")
+time.sleep(7)
 
+print("trying to hit close button")
+driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div/div[2]/button[1]").click()
 
-time.sleep(10)
-driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div/div[1]/button").click()
+#def check_exists_by_xpath(xpath):
+#    try:
+#        webdriver.find_element_by_xpath(xpath)
+#    except NoSuchElementException:
+#        return False
+#    return True
 
- 
-#time.sleep(10)
-#driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div/div[1]/button").click()
-
-time.sleep(20)
+time.sleep(9)
 driver.close()
 driver.quit()
 print("Test Execution Successfully Completed!")
