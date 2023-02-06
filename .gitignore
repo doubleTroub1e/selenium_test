@@ -131,3 +131,6 @@ dmypy.json
 
 # file with credentials
 credentials.py
+
+# file to run quick tests
+test.py
