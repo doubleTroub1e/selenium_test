@@ -1,15 +1,48 @@
+#!/usr/bin/env python3
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from credentials import *
 import time
+import argparse
 
-username = overline_username_2
-password = overline_password_2
+parser = argparse.ArgumentParser()
+parser.add_argument('-u', '--username',
+                    default='1',
+                    dest='user_c',
+                    help='Provide username to use. Defaults to overline_username_1',
+                    type=str
+                    )
+args = parser.parse_args()
+
+def get_valid_username(passed_value):
+    if passed_value == "1":
+        username = overline_username_1
+    elif passed_value == "2":
+        username = overline_username_2
+    elif passed_value == "3":
+        username = overline_username_3
+    else:
+        print("using default username and password")
+        username = overline_username_1
+    return (username)
+
+def get_valid_password(passed_value):
+    if passed_value == "1":
+        password = overline_password_1
+    elif passed_value == "2":
+        password = overline_password_2
+    elif passed_value == "3":
+        password = overline_password_3
+    else:
+        print("using default username and password")
+        password = overline_password_1
+    return (password)
+username = get_valid_username(args.user_c)
+password = get_valid_password(args.user_c)
 
 # place credentials here and uncomment it 
 #username = "paster login here"
 #password = "paster password here here"
-
 
 
 print("Test Execution Started")
@@ -49,7 +82,7 @@ driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div/div[2]/button[1]").
 #        return False
 #    return True
 
-time.sleep(10)
+time.sleep(3)
 driver.close()
 driver.quit()
 print("Test Execution Successfully Completed!")
