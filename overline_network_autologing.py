@@ -45,7 +45,7 @@ password = get_valid_password(args.user_c)
 #password = "paster password here here"
 
 
-print("Test Execution Started")
+print("Test Execution Started, using username " + username )
 options = webdriver.ChromeOptions()
 options.add_argument('--ignore-ssl-errors=yes')
 options.add_argument('--ignore-certificate-errors')
