@@ -39,21 +39,23 @@ class SEIDD():
         self.driver.find_element(By.CSS_SELECTOR, "uni-button[type='primary']").click()
         #-------login process ends
         print("login success...")
-        time.sleep(5)
+        time.sleep(3)
         self.hit_any_button()
 
     def hit_any_button(self):
-        time.sleep(7)
+        time.sleep(2)
         print("trying to hit any button")
         self.driver.find_element(By.CSS_SELECTOR, ".am-u-sm-12.pd.zzmodel").click()
         time.sleep(1)
         self.hit_start_button()
 
     def hit_start_button(self):
-        time.sleep(7)
+        # scroll down a bit to needed button
+        self.driver.execute_script("window.scrollTo(0, 500)") 
+        time.sleep(2)
         print("trying to hit 'Start' button")
         try:
-            self.driver.find_element(By.CSS_SELECTOR, "uni-text[class='gui-icons BtnOnImgTp'] span").click()
+            self.driver.find_element(By.XPATH, "//uni-text[@class='gui-icons']").click()
         except NoSuchElementException:
             print("Failed to hit, button not found...")
             return self.finish_test_close_everything()
