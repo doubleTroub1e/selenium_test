@@ -2,6 +2,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+import undetected_chromedriver as uc 
 from credentials import *
 import time
 import argparse
@@ -41,7 +42,7 @@ class OVERLINE():
     def open_web_site(self):
         #opening overline.network
         self.driver.get("https://overline.network/app/auth")
-        time.sleep(5)
+        time.sleep(10)
         self.login()
 
     def login(self):
@@ -84,14 +85,15 @@ def main():
     password = get_valid_password(args.user_c)
 
     print("Test Execution Started, using username " + username )
-    options = webdriver.ChromeOptions()
+    options = uc.ChromeOptions()
     options.add_argument('--ignore-ssl-errors=yes')
     options.add_argument('--ignore-certificate-errors')
     options.add_argument("--enable-javascript")
-    driver = webdriver.Remote(
-    command_executor='http://localhost:4444/wd/hub',
-    options=options
-    )
+    driver = uc.Chrome(use_subprocess=True,  command_executor='http://localhost:4444/wd/hub', options=options) 
+    #driver = webdriver.Remote(
+    #command_executor='http://localhost:4444/wd/hub',
+    #options=options
+    #)
     OVERLINE(username, password, driver).open_web_site()
 
 if __name__ == "__main__":
